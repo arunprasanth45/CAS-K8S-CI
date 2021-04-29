@@ -32,8 +32,25 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+			  <groupId>org.springframework.boot</groupId>
+			  <artifactId>spring-boot-maven-plugin</artifactId>
+			  <configuration>
+				<layers>
+				  <enabled>true</enabled>
+				</layers>
+				<!-- 
+			    <image>
+				<builder>gcr.io/paketo-buildpacks/builder:base</builder>
+				<buildpacks>
+					<buildpack>gcr.io/paketo-buildpacks/amazon-corretto:latest</buildpack>
+					<buildpack>gcr.io/paketo-buildpacks/maven:latest</buildpack>
+					<buildpack>gcr.io/paketo-buildpacks/executable-jar:latest</buildpack>
+					<buildpack>gcr.io/paketo-buildpacks/spring-boot:latest</buildpack>
+				</buildpacks>
+			</image>
+			 -->
+			  </configuration> 
+			 
 			</plugin>
 		</plugins>
 	</build>
