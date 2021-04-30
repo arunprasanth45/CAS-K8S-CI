@@ -1,9 +1,37 @@
-version: 2.1
+version: 2
 
-orbs:
-  maven: circleci/maven@1.1
-
-workflows:
-  maven_test:
-    jobs:
-      - maven/test
+jobs:
+ build:
+   machine: true
+   steps:
+     # Clean up the workspace.
+     - run:
+          name: Clean Workspace
+          command: rm -r /home/circleci/project/    
+     # Checkout the code as the first step.          
+     - checkout
+     # Building the application RTF    
+     - run:
+          name: Build
+          command: | 
+            cd /home/circleci/project/cas-k8s-demo
+            mvn clean install           
+    # Unit testing            
+     - run:
+          name: Test
+          command: | 
+            cd /home/circleci/project/cas-k8s-demo
+            mvn test   
+     #Docker build                        
+     - run:
+          name: Docker build image
+          command: |
+            cd /home/circleci/project/cas-k8s-demo
+            docker build . -t arunprasanth45/cas-k8s-demo:1.0
+     # Docker login and push                        
+     - run:
+          name: Docker Login and push
+          command: |
+           docker login --username arunprasanth45 --password="Vijayamma45"
+           docker push arunprasanth45/cas-k8s-demo:1.0
+           docker logout
