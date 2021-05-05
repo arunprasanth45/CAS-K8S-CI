@@ -36,7 +36,7 @@ jobs:
            docker push arunprasanth45/cas-k8s-demo:1.0
            docker logout
      # Trigger CD - Updating CD RELEASE BRANCH
-      - run:
+     - run:
           name: Triggering CD (Merging to CD RELEASE BRANCH)
           command: |
            cd /home/circleci/project/
