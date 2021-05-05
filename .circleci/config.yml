@@ -35,3 +35,19 @@ jobs:
            docker login --username arunprasanth45 --password="Vijayamma45"
            docker push arunprasanth45/cas-k8s-demo:1.0
            docker logout
+     # Trigger CD - Updating CD RELEASE BRANCH
+      - run:
+          name: Triggering CD (Merging to CD RELEASE BRANCH)
+          command: |
+           cd /home/circleci/project/
+           git clone https://github.com/arunprasanth45/CAS-K8S-CICD-Deployment.git -b RELEASE
+           git merge origin/main
+           git push
+           
+    
+           
+           
+           
+           
+           
+           
