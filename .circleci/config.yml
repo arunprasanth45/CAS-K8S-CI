@@ -32,7 +32,7 @@ jobs:
      - run:
           name: Docker Login and push
           command: |
-           docker login --username arunprasanth45 --password="Vijayamma45"
+           docker login --username $DOCKER_USERNAME --password=$DOCKER_PASSWORD
            docker push arunprasanth45/cas-k8s-demo:1.0
            docker logout
      # Trigger CD - Updating CD RELEASE BRANCH
