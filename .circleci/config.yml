@@ -42,7 +42,7 @@ jobs:
            cd /home/circleci/project/
            git clone https://$GITHUB_PERSONAL_TOKEN@github.com/arunprasanth45/CAS-K8S-CICD-Deployment.git -b RELEASE
            git merge origin/main
-           git push -q https://$GITHUB_PERSONAL_TOKEN@github.com/arunprasanth45/CAS-K8S-CICD-Deployment.git -b RELEASE
+           git push -q https://$GITHUB_PERSONAL_TOKEN@github.com/arunprasanth45/CAS-K8S-CICD-Deployment.git RELEASE
 
            
     
