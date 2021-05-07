@@ -32,9 +32,7 @@ jobs:
      - run:
           name: Docker- scan image
           command: |
-            sudo apt-get install rpm
-            wget https://github.com/aquasecurity/trivy/releases/download/v0.1.6/trivy_0.1.6_Linux-64bit.deb
-            sudo dpkg -i trivy_0.1.6_Linux-64bit.deb
+            curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh |sudo sh -s -- -b /usr/local/bin
             trivy --exit-code 0 --no-progress arunprasanth45/cas-k8s-demo:1.0           
      # Docker login and push                        
      - run:
