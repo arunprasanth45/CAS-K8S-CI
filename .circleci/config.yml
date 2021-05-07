@@ -18,7 +18,7 @@ jobs:
             mvn clean install           
     # Unit testing            
      - run:
-          name: Test
+          name: Unit Test
           command: | 
             cd /home/circleci/project/cas-k8s-demo
             mvn test   
@@ -28,6 +28,13 @@ jobs:
           command: |
             cd /home/circleci/project/cas-k8s-demo
             docker build . -t arunprasanth45/cas-k8s-demo:1.0
+      #Docker scanning                        
+     - run:
+          name: Docker scan image
+          command: |
+            apk add --update-cache --upgrade curl
+            curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+            trivy --exit-code 0 --no-progress arunprasanth45/cas-k8s-demo:1.0           
      # Docker login and push                        
      - run:
           name: Docker Login and push
