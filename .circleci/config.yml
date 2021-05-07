@@ -53,6 +53,7 @@ jobs:
      - run:
           name: Publishing CD release 
           command: |         
+           cd /home/circleci/project/CAS-K8S-CICD-Deployment
            git push -q https://$GITHUB_PERSONAL_TOKEN@github.com/arunprasanth45/CAS-K8S-CICD-Deployment.git RELEASE
 
            
