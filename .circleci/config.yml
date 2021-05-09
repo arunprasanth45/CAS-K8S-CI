@@ -61,6 +61,8 @@ jobs:
            cd ./helm/cas-k8s-demo
            #cp values.yaml . 
            sed -i 's/1.0/1.0.$TAG/g' values.yaml  
+           git config user.email "arunprasanth45@gmail.com"
+           git config user.name "arunprasanth45"
            git add .
            git commit -m  "Update via CircleCI"
            
