@@ -1,0 +1,66 @@
+version: 2
+
+jobs:
+ build:
+   machine: true
+   steps:
+     # Clean up the workspace.
+     - run:
+          name: Clean Workspace
+          command: rm -r /home/circleci/project/    
+     # Checkout the code as the first step.          
+     - checkout
+     # Building the application 
+     - run:
+          name: Build
+          command: | 
+            cd /home/circleci/project/cas-k8s-demo
+            mvn clean install           
+    # Unit testing            
+     - run:
+          name: Unit Test
+          command: | 
+            cd /home/circleci/project/cas-k8s-demo
+            mvn test   
+     #Docker build                        
+     - run:
+          name: Docker- building image
+          command: |
+            cd /home/circleci/project/cas-k8s-demo
+            docker build . -t arunprasanth45/cas-k8s-demo:1.0
+      #Docker scanning                        
+     - run:
+          name: Docker- scanning image (Using trivy)
+          command: |
+            curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh |sudo sh -s -- -b /usr/local/bin
+            trivy --exit-code 0 --no-progress arunprasanth45/cas-k8s-demo:1.0           
+     # Docker login and push                        
+     - run:
+          name: Docker- pushing image into docker repo
+          command: |
+           echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
+           docker push arunprasanth45/cas-k8s-demo:1.0
+           docker logout
+     # Preparing Release
+     - run:
+          name: Preparing CD release 
+          command: |
+           cd /home/circleci/project/
+           git clone https://$GITHUB_PERSONAL_TOKEN@github.com/arunprasanth45/CAS-K8S-CICD-Deployment.git -b RELEASE
+           cd ./CAS-K8S-CICD-Deployment
+           git merge origin/main           
+     # Publishing Release
+     - run:
+          name: Publishing CD release 
+          command: |         
+           cd /home/circleci/project/CAS-K8S-CICD-Deployment
+           git push -q https://$GITHUB_PERSONAL_TOKEN@github.com/arunprasanth45/CAS-K8S-CICD-Deployment.git RELEASE
+
+           
+    
+           
+           
+           
+           
+           
+           
