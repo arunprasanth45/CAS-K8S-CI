@@ -1,1 +1,1 @@
-# CAS-K8S-CICD
+# CAS-K8S-CI
