@@ -45,7 +45,7 @@ jobs:
           name: Docker- pushing image into docker repo
           command: |
            echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
-          # docker push arunprasanth45/cas-k8s-demo:$TAG
+           docker push arunprasanth45/cas-k8s-demo:$TAG
            docker logout
      # Preparing Release
      - run:
