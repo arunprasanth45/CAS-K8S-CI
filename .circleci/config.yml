@@ -33,18 +33,19 @@ jobs:
           name: Docker- building image
           command: |
             cd /home/circleci/project/cas-k8s-demo
-            docker build . -t arunprasanth45/cas-k8s-demo:1.0
+            TAG=1.0.$CIRCLE_BUILD_NUM
+            docker build . -t arunprasanth45/cas-k8s-demo:$TAG
       #Docker scanning                        
      - run:
           name: Docker- scanning image (Using trivy)
           command: |
-             trivy --exit-code 0 --no-progress arunprasanth45/cas-k8s-demo:1.0           
+             trivy --exit-code 0 --no-progress arunprasanth45/cas-k8s-demo:$TAG           
      # Docker login and push                        
      - run:
           name: Docker- pushing image into docker repo
           command: |
            echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
-           docker push arunprasanth45/cas-k8s-demo:1.0
+          # docker push arunprasanth45/cas-k8s-demo:$TAG
            docker logout
      # Preparing Release
      - run:
@@ -53,7 +54,13 @@ jobs:
            cd /home/circleci/project/
            git clone https://$GITHUB_PERSONAL_TOKEN@github.com/arunprasanth45/CAS-K8S-CD.git -b RELEASE
            cd ./CAS-K8S-CD
-           git merge origin/main           
+           git merge origin/main 
+           cd ./helm/cas-k8s-demo
+           cp values.yaml . 
+           sed -i 's/1.0/1.0.$TAG/g' values.yaml  
+           git add .
+           git commit -m  "Update via CircleCI"
+           
      # Validating Release
      - run:
           name: Validating CD release helm manifest
