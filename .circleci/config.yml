@@ -59,7 +59,7 @@ jobs:
            cd ./CAS-K8S-CD
            git merge origin/main 
            cd ./helm/cas-k8s-demo
-           cp values.yaml . 
+           #cp values.yaml . 
            sed -i 's/1.0/1.0.$TAG/g' values.yaml  
            git add .
            git commit -m  "Update via CircleCI"
