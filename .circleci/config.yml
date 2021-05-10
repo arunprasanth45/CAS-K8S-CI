@@ -63,8 +63,8 @@ jobs:
            git rm ./helm/cas-k8s-demo/values.yaml
            git merge origin/main
            cd ./helm/cas-k8s-demo
-          # sed -i 's/1.0(.*\)/'$TAG'/g' values.yaml 
-           sed -i 's/1.0(.*\)/'$TAG'/g' values.yaml      
+           sed -i 's/1.0.(.*\)/'$TAG'/g' values.yaml 
+           # sed -i 's/1.0.*/'$TAG'/g' values.yaml      
      # Validating Release
      - run:
           name: Validating CD release helm manifest
