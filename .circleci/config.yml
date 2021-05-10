@@ -59,9 +59,9 @@ jobs:
            cd /home/circleci/project/
            git clone https://$GITHUB_PERSONAL_TOKEN@github.com/arunprasanth45/CAS-K8S-CD.git -b RELEASE
            cd ./CAS-K8S-CD
-           git merge origin/main 
-           cd ./helm/cas-k8s-demo
-           sed -i 's/TAG_FROM_CIRCLE_CI/\'$TAG'/'/g' values.yaml             
+          # git merge origin/main 
+          # cd ./helm/cas-k8s-demo
+          # sed -i 's/TAG_FROM_CIRCLE_CI/\'$TAG'/'/g' values.yaml             
      # Validating Release
      - run:
           name: Validating CD release helm manifest
