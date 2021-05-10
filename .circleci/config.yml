@@ -46,9 +46,9 @@ jobs:
           name: Docker- pushing image into docker repo
           command: |
            TAG=1.0.$CIRCLE_BUILD_NUM
-         #  echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
-         #  docker push arunprasanth45/cas-k8s-demo:$TAG
-         #  docker logout
+           echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
+           docker push arunprasanth45/cas-k8s-demo:$TAG
+           docker logout
      # Preparing Release.
      - run:
           name: Preparing CD release helm manifest
