@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class VersionInfoService {
 	
-	@Value("${service.version}")
-    private String serviceVersion;
+	@Value("${api.version}")
+    private String apiVersion;
 	
-	@GetMapping("/version")
+	@GetMapping("/api/version")
 	public String getVersion() {
-		return serviceVersion;
+		return apiVersion;
 	}
 	 
 
