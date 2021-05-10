@@ -69,7 +69,7 @@ jobs:
           command: | 
            cd /home/circleci/project/CAS-K8S-CD/helm/cas-k8s-demo
            helm lint         
-     # Publishing Release
+     # Publishing Release test
      - run:
           name: Publishing CD release helm manifest
           command: |         
