@@ -16,7 +16,7 @@ jobs:
           command: rm -r /home/circleci/project/    
      # Checkout the code as the first step.          
      - checkout
-     # Building the application 
+     # Building the application. 
      - run:
           name: Build
           command: | 
