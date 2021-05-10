@@ -46,9 +46,9 @@ jobs:
           name: Docker- pushing image into docker repo
           command: |
            TAG=1.0.$CIRCLE_BUILD_NUM
-           echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
-           docker push arunprasanth45/cas-k8s-demo:$TAG
-           docker logout
+         #  echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
+         #  docker push arunprasanth45/cas-k8s-demo:$TAG
+         #  docker logout
      # Preparing Release
      - run:
           name: Preparing CD release helm manifest
@@ -60,11 +60,11 @@ jobs:
            git merge origin/main 
            cd ./helm/cas-k8s-demo
            #cp values.yaml . 
-           sed -i 's/1.0/1.0.$TAG/g' values.yaml  
+           sed -i 's/TAG_FROM_CIRCLE_CI/\'$TAG'/'/g' values.yaml  
            git config user.email "arunprasanth45@gmail.com"
            git config user.name "arunprasanth45"
            git add .
-           git commit -m  "Update via CircleCI"
+           git commit -m  "Updated via CircleCI"
            
      # Validating Release
      - run:
