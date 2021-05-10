@@ -60,7 +60,8 @@ jobs:
            git config user.email "arunprasanth45@gmail.com"
            git config user.name "arunprasanth45"
            git config credential.helper 'cache --timeout=120'
-           git reset --hard origin/main
+           git rm ./helm/cas-k8s-demo/values.yaml
+           git merge origin/main
            cd ./helm/cas-k8s-demo
            sed -i 's/TAG_FROM_CIRCLE_CI/'$TAG'/g' values.yaml             
      # Validating Release
