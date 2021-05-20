@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<databaseChangeLog  
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"  
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">  
+
+
+  <changeSet  id="cas_cs_2.1.1" author="Arun Prasanth" > 
+    <dropNotNullConstraint   
+            columnDataType="varchar(50)"  
+            columnName="LAST_NAME"  
+            schemaName="public"  
+            tableName="T_USER_CAS"/> 	
+  </changeSet>  
+   
+   <!-- Release tagging CAS-2.1 -->
+   <changeSet  id="cas_cs_2.1.2" author="Arun Prasanth">  
+       <tagDatabase tag="CAS-2.1"></tagDatabase>
+   </changeSet>
+   
+  </databaseChangeLog>
