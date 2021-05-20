@@ -32,15 +32,18 @@ jobs:
      - run:
           name: Docker- building image
           command: |
-            cd /home/circleci/project/cas-k8s-demo
             TAG=1.0.$CIRCLE_BUILD_NUM
+            cd /home/circleci/project/cas-k8s-demo            
             docker build . -t arunprasanth45/cas-k8s-demo:$TAG
+            cd /home/circleci/project/database
+            docker build . -t arunprasanth45/cas-k8s-demo-db:$TAG            
       #Docker scanning                        
      - run:
           name: Docker- scanning image (Using trivy)
           command: |
              TAG=1.0.$CIRCLE_BUILD_NUM
-             trivy --exit-code 0 --no-progress arunprasanth45/cas-k8s-demo:$TAG           
+             trivy --exit-code 0 --no-progress arunprasanth45/cas-k8s-demo:$TAG
+             trivy --exit-code 0 --no-progress arunprasanth45/cas-k8s-demo-db:$TAG 
      # Docker login and push                        
      - run:
           name: Docker- pushing image into docker repo
@@ -48,6 +51,7 @@ jobs:
            TAG=1.0.$CIRCLE_BUILD_NUM
            echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
            docker push arunprasanth45/cas-k8s-demo:$TAG
+           docker push arunprasanth45/cas-k8s-demo-db:$TAG
            docker logout
      # Preparing Release.
      - run:
