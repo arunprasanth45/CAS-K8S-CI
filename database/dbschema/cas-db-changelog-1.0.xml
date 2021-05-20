@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+	<databaseChangeLog  
+	  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"  
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+	  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd"> 
+	   
+    <changeSet  id="cas_cs_1.0.1" author="Arun Prasanth" >  
+     <createSequence   
+            cycle="true"  
+            dataType="int"  
+            incrementBy="1"  
+            schemaName="public"  
+            sequenceName="CAS_USERID_SEQUENCE"  
+            startValue="1000"/>  
+            
+     <createTable  tableName="T_USER_CAS"  remarks="CAS user table" schemaName="public"  >  
+            <column  name="ID"  type="bigint">  
+                <constraints  primaryKey="true"  nullable="false"/>  
+            </column>  
+            <column  name="FIRST_NAME"  type="varchar(50)">  
+                <constraints  nullable="false"/>  
+            </column>  
+            <column  name="LAST_NAME"  type="varchar(50)">  
+                <constraints  nullable="false"/>  
+            </column>
+            <column  name="AGE"  type="int"/>  
+		    <column  name="CREATED_AT"  type="datetime"/>                       
+			<column  name="UPDATED_AT"  type="datetime"/>   
+			  
+       </createTable>  
+       <comment> Created table and sequence for CAS User</comment>
+    </changeSet>  
+    
+    <!--  tagging release CAS-1.0-->
+   <changeSet  id="cas_cs_1.0.2" author="Arun Prasanth">  
+       <tagDatabase tag="CAS-1.0"></tagDatabase>
+   </changeSet>
+   
+ </databaseChangeLog>
+	
+	 
